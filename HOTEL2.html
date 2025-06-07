@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Oasis - Baños Inteligentes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #005792;
+            --secondary: #00B4D8;
+            --accent: #FF9E00;
+            --dark: #1A1A2E;
+            --light: #F8F9FA;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/connected.png');
+            opacity: 0.1;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero {
+            height: 400px;
+            background: linear-gradient(rgba(0, 87, 146, 0.7), rgba(0, 180, 216, 0.7)), 
+                        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            background-color: #ffaa00;
+        }
+        
+        .btn i {
+            margin-left: 8px;
+        }
+        
+        .servicios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 3rem 0;
+        }
+        
+        .servicio {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .servicio:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .servicio-img {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .servicio:hover .servicio-img {
+            transform: scale(1.05);
+        }
+        
+        .servicio-content {
+            padding: 1.5rem;
+        }
+        
+        .servicio h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .servicio p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .servicio-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .servicio-meta span {
+            display: flex;
+            align-items: center;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .servicio-meta i {
+            margin-right: 8px;
+            color: var(--accent);
+        }
+        
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        
+        .beneficios, .about {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .beneficios::before, .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        section h2 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .beneficios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .beneficio-card {
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .beneficio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .beneficio-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .beneficio-card h3 i {
+            margin-right: 10px;
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-img {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-list {
+            list-style: none;
+        }
+        
+        .about-list li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .about-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark), #16213E);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #ddd;
+            margin-bottom: 1rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            animation: slideUp 0.8s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        
+        /* Efecto de partículas */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .beneficios, .about {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Hotel Oasis</h1>
+            <p class="tagline">Baños Inteligentes con Tecnología Avanzada</p>
+        </div>
+        <div class="particles" id="particles-js"></div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Innovación en Confort Sanitario</h2>
+                <p>Descubre nuestros baños inteligentes diseñados con tecnología de punta para máxima higiene, eficiencia y accesibilidad</p>
+                <a href="#servicios" class="btn">Explorar Baños <i class="fas fa-arrow-down"></i></a>
+            </div>
+        </section>
+
+        <section id="servicios">
+            <h2 class="animate">Nuestros Baños Inteligentes</h2>
+            <div class="servicios">
+                <div class="servicio animate delay-1">
+                    <div class="badge">Exclusivo</div>
+                    <img src="https://i.pinimg.com/236x/43/06/22/43062288933139f294efbd9d139d5bd1.jpg" alt="Baño privado para empleado" class="servicio-img">
+                    <div class="servicio-content">
+                        <h3>Privado para empleado</h3>
+                        <p>Diseño exclusivo para gerencia o supervisión con tecnología touchless y máxima privacidad.</p>
+                        <div class="servicio-meta">
+                            <span><i class="fas fa-ruler-combined"></i> 2.5 m²</span>
+                            <span><i class="fas fa-bath"></i> Inodoro, lavamanos</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="servicio animate delay-2">
+                    <div class="badge">Operativo</div>
+                    <img src="https://www.ole.pl/uploads/blog/post/toalety-w-miejscu-pracy-aranzacja-katrin.jpg?1558089843037" alt="Baño personal operativo" class="servicio-img">
+                    <div class="servicio-content">
+                        <h3>Personal operativo</h3>
+                        <p>Baños funcionales con sistema de desinfección UV y control de humedad automático.</p>
+                        <div class="servicio-meta">
+                            <span><i class="fas fa-ruler-combined"></i> 4.5 m²</span>
+                            <span><i class="fas fa-bath"></i> Inodoro, ducha, casillero</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="servicio animate delay-1">
+                    <div class="badge">Visitas</div>
+                    <img src="https://previews.123rf.com/images/pcphotography/pcphotography2004/pcphotography200400904/145659476-beautiful-white-guest-bathroom.jpg" alt="Baño individual para visitas" class="servicio-img">
+                    <div class="servicio-content">
+                        <h3>Baño individual para visitas</h3>
+                        <p>Elegantes baños con espejos inteligentes y dispensadores automáticos para clientes VIP.</p>
+                        <div class="servicio-meta">
+                            <span><i class="fas fa-ruler-combined"></i> 2 m²</span>
+                            <span><i class="fas fa-bath"></i> Inodoro, lavamanos</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="servicio animate delay-2">
+                    <div class="badge">Inclusivo</div>
+                    <img src="https://www.mediclinics.com/img/cms/archivos/blog/lavabos%20accesibles%20II/Mediclinics%20ambiente%20render-RESIDENCIA%202.jpg" class="servicio-img">
+                    <div class="servicio-content">
+                        <h3>Baño universal (inclusivo)</h3>
+                        <p>Sistema de asistencia inteligente con sensores de movimiento y barras ergonómicas.</p>
+                        <div class="servicio-meta">
+                            <span><i class="fas fa-ruler-combined"></i> 3.5-4.5 m²</span>
+                            <span><i class="fas fa-wheelchair"></i> Accesible</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="servicio animate delay-1">
+                    <div class="badge">Colectivo</div>
+                    <img src="https://previews.123rf.com/images/vetertravel/vetertravel2301/vetertravel230100068/198018102-entrance-to-a-public-toilet-two-doors-to-the-public-toilet-for-women-and-men-indicative-sign-for.jpg" alt="Baño múltiple" class="servicio-img">
+                    <div class="servicio-content">
+                        <h3>Baño múltiple (hombres/mujeres)</h3>
+                        <p>Sistema de ventilación inteligente y monitoreo de ocupación en tiempo real.</p>
+                        <div class="servicio-meta">
+                            <span><i class="fas fa-ruler-combined"></i> 6-12 m²</span>
+                            <span><i class="fas fa-users"></i> Cubículos, urinarios</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="beneficios" id="beneficios">
+            <h2 class="animate">Tecnología Avanzada</h2>
+            <div class="beneficios-grid">
+                <div class="beneficio-card animate delay-1">
+                    <h3><i class="fas fa-tint"></i> Ahorro de Agua Inteligente</h3>
+                    <p>Sistemas de flujo controlado por sensores que reducen el consumo de agua hasta en un 60% sin sacrificar rendimiento.</p>
+                </div>
+                <div class="beneficio-card animate delay-2">
+                    <h3><i class="fas fa-broom"></i> Autolimpieza</h3>
+                    <p>Tecnología de autodesinfección con luz UV y superficies antibacterianas que mantienen la higiene óptima.</p>
+                </div>
+                <div class="beneficio-card animate delay-1">
+                    <h3><i class="fas fa-temperature-low"></i> Control Climático</h3>
+                    <p>Sistema inteligente que regula temperatura y humedad para máxima comodidad en todo momento.</p>
+                </div>
+                <div class="beneficio-card animate delay-2">
+                    <h3><i class="fas fa-mobile-alt"></i> Monitoreo IoT</h3>
+                    <p>Sensores conectados que alertan sobre mantenimiento necesario y optimizan el uso de recursos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about">
+            <h2 class="animate">Acerca de Nosotros</h2>
+            <div class="about-content">
+                <div class="about-img animate delay-1">
+                    <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80" alt="Hotel Oasis">
+                </div>
+                <div class="about-text animate delay-2">
+                    <p>En <strong>Hotel Oasis</strong>, nos dedicamos a ofrecer una experiencia cómoda, segura y sostenible a nuestros huéspedes. Nuestro compromiso con la innovación nos ha llevado a renovar nuestras instalaciones con soluciones sanitarias de última generación que combinan eficiencia, elegancia y accesibilidad.</p>
+                    <p>Contamos con un equipo apasionado por el servicio al cliente y trabajamos día a día para asegurar que cada detalle de su estancia sea excepcional.</p>
+                    
+                    <h3 style="margin-top: 1.5rem;">Nuestros Valores:</h3>
+                    <ul class="about-list">
+                        <li>Instalaciones modernas con tecnología IoT</li>
+                        <li>Compromiso con la sostenibilidad ambiental</li>
+                        <li>Accesibilidad universal certificada</li>
+                        <li>Atención personalizada 24/7</li>
+                        <li>Innovación continua en servicios</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Hotel Oasis</h3>
+                    <p>Líderes en soluciones sanitarias inteligentes para hotelería de alto nivel.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Innovación 123, Tech City</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                    <p><i class="fas fa-envelope"></i> info@hoteloasis.com</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <a href="#servicios">Nuestros Baños</a>
+                    <a href="#beneficios">Tecnología</a>
+                    <a href="#">Reservaciones</a>
+                    <a href="#">Políticas</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Hotel Oasis. Todos los derechos reservados. Diseño Inteligente.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animación de partículas
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles-js');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Tamaño aleatorio entre 1px y 3px
+                const size = Math.random() * 2 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posición aleatoria
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Opacidad aleatoria
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                // Animación
+                const duration = Math.random() * 20 + 10;
+                particle.style.animation = `float ${duration}s linear infinite`;
+                
+                particlesContainer.appendChild(particle);
+            }
+            
+            // Animación para las partículas
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes float {
+                    0% {
+                        transform: translateY(0) translateX(0);
+                        opacity: 0.1;
+                    }
+                    50% {
+                        opacity: 0.5;
+                    }
+                    100% {
+                        transform: translateY(-100vh) translateX(20px);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Efecto de aparición al hacer scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.animate').forEach(el => {
+                observer.observe(el);
+            });
+        });
+        
+        // Botón flotante de WhatsApp
+        const whatsappBtn = document.createElement('a');
+        whatsappBtn.href = "https://wa.me/1234567890";
+        whatsappBtn.className = "whatsapp-btn";
+        whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
+        whatsappBtn.style.position = 'fixed';
+        whatsappBtn.style.bottom = '20px';
+        whatsappBtn.style.right = '20px';
+        whatsappBtn.style.backgroundColor = '#25D366';
+        whatsappBtn.style.color = 'white';
+        whatsappBtn.style.width = '60px';
+        whatsappBtn.style.height = '60px';
+        whatsappBtn.style.borderRadius = '50%';
+        whatsappBtn.style.display = 'flex';
+        whatsappBtn.style.alignItems = 'center';
+        whatsappBtn.style.justifyContent = 'center';
+        whatsappBtn.style.fontSize = '30px';
+        whatsappBtn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+        whatsappBtn.style.zIndex = '1000';
+        whatsappBtn.style.transition = 'all 0.3s ease';
+        
+        whatsappBtn.addEventListener('mouseenter', () => {
+            whatsappBtn.style.transform = 'scale(1.1)';
+        });
+        
+        whatsappBtn.addEventListener('mouseleave', () => {
+            whatsappBtn.style.transform = 'scale(1)';
+        });
+        
+        document.body.appendChild(whatsappBtn);
+    </script>
+</body>
+</html>
